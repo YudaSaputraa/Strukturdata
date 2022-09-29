@@ -1,0 +1,1 @@
+bantu -> next -> id != idd && bantu -> next != NUL
