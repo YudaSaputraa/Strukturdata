@@ -5,13 +5,11 @@ using namespace std;
 
 struct node
 {
-    string nama, alamat;
+    char nama[20], alamat[20];
     long long int nim;
     node *next;
 };
 node *kepala, *ekor, *baru, *bantu, *hapus, *awal, *akhir;
-
-int idd;
 
 void newNode();
 bool cekList();
@@ -29,7 +27,8 @@ int main()
     do
     {
         cout << endl;
-        cout << "++++++ PROGRAM LINKED LIST nihh ++++++" << endl;
+        cout << "++++++ PROGRAM LINKED LIST Kepala & Ekor ++++++" << endl;
+        cout << endl;
         cout << "Disini Tersedia :" << endl;
         cout << "1. Input Data" << endl;
         cout << "2. Lihat Data Maju" << endl;

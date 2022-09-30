@@ -5,13 +5,13 @@ using namespace std;
 
 struct node
 {
-    string nama, alamat;
-    int nim, id;
+    char nama[20], alamat[20];
+    long int nim;
     node *next;
 };
 node *awal, *akhir, *baru, *bantu, *hapus;
 
-int idd;
+long int nimm;
 
 void newNode();
 int cekList();
@@ -29,7 +29,8 @@ int main()
     do
     {
         cout << endl;
-        cout << "++++++ PROGRAM LINKED LIST nihh ++++++" << endl;
+        cout << "++++++ PROGRAM LINKED LIST Pointer ++++++" << endl;
+        cout<<endl;
         cout << "Disini Tersedia :" << endl;
         cout << "1. Input Data" << endl;
         cout << "2. Lihat Data" << endl;
@@ -106,12 +107,10 @@ int cekList()
 
 void infoNode()
 {
-    cout << "Masukkan Id\t : ";
-    cin >> baru->id;
-    cout << "Masukkan Nama\t : ";
-    cin >> baru->nama;
     cout << "Masukkan NIM\t : ";
     cin >> baru->nim;
+    cout << "Masukkan Nama\t : ";
+    cin >> baru->nama;
     cout << "Masukkan Alamat\t : ";
     cin >> baru->alamat;
 }
@@ -143,17 +142,15 @@ void sisipTengah()
     cout << endl;
     cout << "Sisip Tengah" << endl;
     baru = new node;
-    cout << "Masukkan Id\t : ";
-    cin >> baru->id;
-    cout << "Masukkan Nama\t : ";
-    cin >> baru->nama;
     cout << "Masukkan NIM\t : ";
     cin >> baru->nim;
+    cout << "Masukkan Nama\t : ";
+    cin >> baru->nama;
     cout << "Masukkan Alamat\t : ";
     cin >> baru->alamat;
     baru->next = NULL;
     bantu = awal;
-    while (bantu->next->id < baru->id) // ketika false
+    while (bantu->next->nim < baru->nim) // ketika false
     {
         bantu = bantu->next;
     }
@@ -168,8 +165,8 @@ void lihatData()
     while (bantu != NULL)
     {
         cout << endl;
-        cout << "Nama\t : " << bantu->nama << endl;
         cout << "NIM\t : " << bantu->nim << endl;
+        cout << "Nama\t : " << bantu->nama << endl;
         cout << "Alamat \t : " << bantu->alamat << endl;
         bantu = bantu->next;
     }
@@ -184,19 +181,18 @@ void hapusNode()
     }
     else
     {
-    cout << "Masukkan Id Node : ";
-    cin >> idd;
-        if (awal->id == idd)
+        cout << "Masukkan NIM : ";
+        cin >> nimm;
+        if (awal->nim == nimm)
         {
             hapus = awal;
             awal = hapus->next;
             free(hapus);
-            cout << "Data Terhapus" << endl;
         }
         else
         {
             bantu = awal;
-            while (bantu->next->id != idd && bantu->next != NULL)
+            while (bantu->next->nim != nimm && bantu->next != NULL)
             {
                 bantu = bantu->next;
             }
@@ -218,8 +214,8 @@ void hapusNode()
                 }
                 free(hapus);
                 system("cls");
-                cout << "Data Terhapus" << endl;
             }
         }
+        cout << "Data " << nimm << " Terhapus!" << endl;
     }
 }

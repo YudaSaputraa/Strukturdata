@@ -1,7 +1,6 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
@@ -9,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Yudha/Desktop/UPNVY/SEMESTER III/Praktikum Implementasi Struktur Data/LinkList_KepalaDanBerekor",
-      "program": "c:/Users/Yudha/Desktop/UPNVY/SEMESTER III/Praktikum Implementasi Struktur Data/LinkList_KepalaDanBerekor/build/Debug/outDebug",
+      "cwd": "c:/Users/Yudha/Desktop/UPNVY/SEMESTER III/Praktikum Implementasi Struktur Data/Code/LinkList_Melingkar",
+      "program": "c:/Users/Yudha/Desktop/UPNVY/SEMESTER III/Praktikum Implementasi Struktur Data/Code/LinkList_Melingkar/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
