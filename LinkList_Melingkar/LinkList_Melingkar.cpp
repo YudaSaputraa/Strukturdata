@@ -6,13 +6,14 @@ struct node
     int angka;
     node *next;
 };
-node *baru, *awal, *akhir, *bantu, *kepala, *depan, *hapus;
+node *baru, *awal, *akhir, *bantu, *kepala, *depan, *hapus, *jumlah;
 
+int jmlNode = 0;
 void newList();
-int cekList();
+bool cekList();
 void sisipNode();
-void bacaData();
-void cetakListBelakang();
+void bacaDataDepan();
+void bacaTengah();
 void hapusNode();
 
 int main()
@@ -27,8 +28,9 @@ int main()
         cout << "++++ PROGRAM LINKED LIST MELINGKAR ++++" << endl;
         cout << "Pilihan Menu" << endl;
         cout << "1. Input Data" << endl;
-        cout << "2. Lihat Data" << endl;
-        cout << "3. Hapus Data" << endl;
+        cout << "2. Lihat Data Depan" << endl;
+        cout << "3. Lihat Data Tengah" << endl;
+        cout << "4. Hapus Data"<<endl;
         cout << "Masukkan Pilihan : ";
         cin >> pilih;
         system("cls");
@@ -38,12 +40,16 @@ int main()
             sisipNode();
             break;
         case 2:
-            bacaData();
+            bacaDataDepan();
             break;
         case 3:
+            bacaTengah();
+            break;
+        case 4 :
             hapusNode();
             break;
         default:
+            cout<<"Pilihan Tidak adaa!";
             break;
         }
         cout << endl;
@@ -60,51 +66,53 @@ void newList()
     kepala->next = kepala;
 }
 
-int cekList()
+bool cekList()
 {
-    if (kepala->next == kepala)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
+    return kepala->next == kepala;
 }
 
 void sisipNode()
 {
-
-    baru = new node;
-    cout << "input angka : ";
-    cin >> baru->angka;
-    baru->next = NULL;
-    if (cekList())
+    int jumlahData;
+    cout << "Masukkan Jumlah data : ";
+    cin >> jumlahData;
+    for (int i = 1; i <= jumlahData; i++)
     {
-        baru->next = kepala; // sisip depan
-        kepala->next = baru;
-    }
-    else
-    {
-        bantu = kepala;
-        while (bantu->next != kepala && baru->angka > bantu->next->angka)
+        baru = new node;
+        cout << "input angka ke "<<i<<" : ";
+        cin >> baru->angka;
+        baru->next = NULL;
+        if (cekList())
         {
-            bantu = bantu->next;
-        }
-        if (bantu->next != kepala)
-        {
-            baru->next = bantu->next;
-            bantu->next = baru;
+            baru->next = kepala;
+            kepala->next = baru;
+            jmlNode++;
+            kepala->angka = jmlNode;
         }
         else
         {
-            baru->next = kepala;
-            bantu->next = baru;
+            bantu = kepala;
+            while (bantu->next != kepala && baru->angka > bantu->next->angka)
+            {
+                bantu = bantu->next;
+            }
+            if (bantu->next != kepala)
+            {
+                baru->next = bantu->next;
+                bantu->next = baru;
+            }
+            else
+            {
+                baru->next = kepala;
+                bantu->next = baru;
+            }
+            jmlNode++;
+            kepala->angka = jmlNode;
         }
     }
 }
 
-void bacaData()
+void bacaDataDepan()
 {
     if (cekList())
     {
@@ -116,31 +124,76 @@ void bacaData()
         cout << "==== Data ====" << endl;
         while (bantu != kepala)
         {
-            cout << bantu->angka <<", ";
+            cout << bantu->angka << ", ";
             bantu = bantu->next;
         }
     }
+    cout<<endl;
+    cout<<"Banyak Node : "<<kepala->angka;
 }
 
-void hapusNode(){
-    if(cekList()){
-        cout<<"Input Data Dulu!";
-    }else{
-        int infoHapus;
-        cout<<"Masukkan Angka : ";
-        cin>>infoHapus;
-        bantu = kepala;
-        while(bantu -> next -> angka != infoHapus && bantu -> next != kepala){
+void bacaTengah()
+{
+    int angkaTangah;
+    jumlah = 0;
+    cout << "Input Angka Tengah : ";
+    cin >> angkaTangah;
+    bantu = kepala->next;
+    while (bantu->angka != angkaTangah && bantu->next != kepala)
+    {
+        bantu = bantu->next;
+    }
+    do
+    {
+        if (bantu == kepala)
+        {
             bantu = bantu->next;
         }
-        if(bantu -> next != kepala){
-            hapus = bantu -> next;
+        else
+        {
+            cout  << bantu->angka<< ", ";
+            bantu = bantu->next;
+            jumlah = jumlah + bantu->angka;
+        }
+    } while (bantu->angka != angkaTangah);
+    cout<<endl;
+    cout<<"Banyak Node : "<<kepala->angka;
+}
+
+void hapusNode()
+{
+    int infoHapus;
+    if (cekList())
+    {
+        cout << "Input Data Dulu!";
+    }
+    else
+    {
+        cout << "Masukkan Angka : ";
+        cin >> infoHapus;
+        bantu = kepala;
+        while (bantu->next->angka != infoHapus && bantu->next != kepala)
+        {
+            bantu = bantu->next;
+        }
+        if (bantu->next != kepala)
+        {
+            hapus = bantu->next;
             bantu->next = hapus->next;
             free(hapus);
-        }else{
-            hapus = bantu -> next;
-            bantu -> next = kepala;
+        }
+        else
+        {
+            hapus = bantu->next;
+            bantu->next = kepala;
             free(hapus);
         }
+        jmlNode--;
+        kepala->angka = jmlNode;
+        cout<<endl;
+        cout<<"Data "<<infoHapus<<" Terhapus!"<<endl;
     }
+    bacaDataDepan();
+    cout<<endl;
+
 }

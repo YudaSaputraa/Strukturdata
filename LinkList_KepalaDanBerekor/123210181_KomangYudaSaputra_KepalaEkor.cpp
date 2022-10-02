@@ -5,7 +5,7 @@ using namespace std;
 
 struct node
 {
-    char nama[20], alamat[20];
+    char namabuah[20], alamat[20];
     long long int nim;
     node *next;
 };
@@ -84,7 +84,7 @@ void dataNode()
     cout << "Masukkan NIM\t : ";
     cin >> baru->nim;
     cout << "Masukkan Nama\t : ";
-    cin >> baru->nama;
+    cin >> baru->namabuah;
     cout << "Masukkan Alamat\t : ";
     cin >> baru->alamat;
 }
@@ -145,7 +145,7 @@ void lihatDataMaju()
         {
             cout << endl;
             cout << "NIM\t : " << bantu->nim << endl;
-            cout << "Nama\t : " << bantu->nama << endl;
+            cout << "Nama\t : " << bantu->namabuah << endl;
             cout << "Alamat\t : " << bantu->alamat << endl;
             bantu = bantu->next;
         }
@@ -169,9 +169,9 @@ void lihatDataMundur()
             do
             {
                 bantu = awal;
-                while (bantu->next != ekor)
+                while (bantu->next != ekor){
                     bantu = bantu->next;
-
+                }
                 ekor->next = bantu;
                 ekor = bantu;
 
@@ -185,7 +185,7 @@ void lihatDataMundur()
         {
             cout << endl;
             cout << "NIM\t : " << bantu->nim << endl;
-            cout << "Nama\t : " << bantu->nama << endl;
+            cout << "Nama\t : " << bantu->namabuah << endl;
             cout << "Alamat\t : " << bantu->alamat << endl;
             bantu = bantu->next;
         }

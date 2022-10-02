@@ -30,7 +30,7 @@ int main()
     {
         cout << endl;
         cout << "++++++ PROGRAM LINKED LIST Pointer ++++++" << endl;
-        cout<<endl;
+        cout << endl;
         cout << "Disini Tersedia :" << endl;
         cout << "1. Input Data" << endl;
         cout << "2. Lihat Data" << endl;
