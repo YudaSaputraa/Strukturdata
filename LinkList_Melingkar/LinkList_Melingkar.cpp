@@ -1,12 +1,14 @@
 #include <iostream>
 using namespace std;
 
+
 struct node
 {
     int angka;
     node *next;
 };
 node *baru, *awal, *akhir, *bantu, *kepala, *depan, *hapus, *jumlah;
+
 
 int jmlNode = 0;
 void newList();
@@ -153,7 +155,6 @@ void bacaTengah()
         {
             cout  << bantu->angka<< ", ";
             bantu = bantu->next;
-            jumlah = jumlah + bantu->angka;
         }
     } while (bantu->angka != angkaTangah);
     cout<<endl;

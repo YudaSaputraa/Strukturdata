@@ -123,7 +123,6 @@ void lihatDataMaju()
     {
         if (kepala->nim > kepala->next->nim)
         {
-
             awal = kepala;
             kepala = ekor;
 
