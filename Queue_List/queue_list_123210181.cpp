@@ -107,12 +107,10 @@ void _dequeue()
     {
         bantu = qDepan;
         cout << "---- Antrian Dengan ---- " << endl;
-        while (bantu != NULL)
-        {
+
             cout << "Nama\t : " << bantu->nama << endl;
             cout << "NIM\t : " << bantu->nim << endl;
-            bantu = bantu->next;
-        }
+        
         cout << "---- Dipersilahkan Masuk ---- " << endl;
         hapus = qDepan;
         qDepan = hapus->next;
@@ -153,9 +151,10 @@ int main()
 {
     int pilih;
     char back;
-    //  _buatQueue();
+ 
     do
     {
+        cout << endl;
         cout << "==== PROGRAM ANTRIAN PSIKOLOGIS ====" << endl;
         cout << "Menu :" << endl;
         cout << "1. Daftar" << endl;
