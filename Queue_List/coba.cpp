@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
 using namespace std;
 
 struct queues
@@ -7,12 +6,61 @@ struct queues
     string nama;
     int nim;
     queues *next;
-};
-queues *qDepan, *qBelakang, *queueBaru, *hapus, *bantu;
+}; queues *qDepan, *qBelakang, *queueBaru, *hapus, *bantu;
 
 int maxQueue;
 
-int _banyakQueue()
+int banyakqueue();
+bool queuekosong();
+void cetakqueue();
+void dequeue();
+
+int main()
+{
+    int pilih;
+    char kembali;
+ 
+    do
+    {
+        cout << endl;
+        cout << "Antrian Bioskop\n"
+             << "Menu :\n" 
+             << "1. Input Data Penonton\n"
+             << "2. Daftar Antrian\n"
+             << "3. Masuk Ruangan\n"
+             << "4. Exit\n"
+             << "Pilih : ";
+        cin >> pilih;
+        switch (pilih)
+        {
+        case 1:
+            cout << "======================="
+                 << "| Input Data Penonton |"
+                 << "=======================" << endl;
+            enqueue();
+            break;
+        case 2:
+            cout << "======================"
+                 << "|   Daftar Antrian   |"
+                 << "======================" << endl;
+            cetakqueue();
+            break;
+        case 3:
+
+            dequeue();
+            break;
+
+        default:
+            break;
+        }
+        cout << endl;
+        cout << "Kembali ke Menu ? (y/n) ";
+        cin >> kembali;
+        system("cls");
+    } while (kembali == 'y' || kembali == 'Y');
+}
+
+int banyakqueue()
 {
     if (qDepan == NULL)
     {
@@ -31,9 +79,9 @@ int _banyakQueue()
     }
 }
 
-bool _kosong()
+bool queuekosong()
 {
-    if (_banyakQueue() == 0)
+    if (banyakqueue() == 0)
     {
         return true;
     }
@@ -43,9 +91,9 @@ bool _kosong()
     }
 }
 
-bool _full()
+bool queuepenuh()
 {
-    if (_banyakQueue() == maxQueue)
+    if (banyakqueue() == maxQueue)
     {
         return true;
     }
@@ -55,7 +103,7 @@ bool _full()
     }
 }
 
-void _inputDepan()
+void inputdepan()
 {
     cout << "Nama\t : ";
     cin >> qDepan->nama;
@@ -63,30 +111,30 @@ void _inputDepan()
     cin >> qDepan->nim;
 }
 
-void _inputBaru()
+void inputbaru()
 {
     cout << "Nama\t : ";
     cin >> queueBaru->nama;
     cout << "NIM\t : ";
     cin >> queueBaru->nim;
 }
-void _enqueue()
+void enqueue()
 {
-    cout << endl;
-    cout << "Masukkan Maksimal data : ";
-    cin >> maxQueue;
 
-    if (_full())
+    cout<<"Masukkan Jumlah Maximal Penonton :\n";
+    cin>>maxQueue;
+
+    if (queuepenuh())
     {
         cout << "Antrian Penuh!!!" << endl;
     }
     else
     {
 
-        if (_kosong())
+        if (queuekosong())
         {
             qDepan = new queues();
-            _inputDepan();
+            inputdepan();
             qDepan->next = NULL;
             qBelakang = qDepan;
         }
@@ -94,7 +142,7 @@ void _enqueue()
         {
             queueBaru = new queues();
 
-            _inputBaru();
+            inputbaru();
             queueBaru->next = NULL;
             qBelakang->next = queueBaru;
             qBelakang = queueBaru;
@@ -102,9 +150,9 @@ void _enqueue()
     }
 }
 
-void _dequeue()
+void dequeue()
 {
-    if (_kosong())
+    if (queuekosong())
     {
         cout << "Antrian Masih Kosong!" << endl;
     }
@@ -113,9 +161,9 @@ void _dequeue()
         bantu = qDepan;
         cout << "---- Antrian Dengan ---- " << endl;
 
-        cout << "Nama\t : " << bantu->nama << endl;
-        cout << "NIM\t : " << bantu->nim << endl;
-
+            cout << "Nama\t : " << bantu->nama << endl;
+            cout << "NIM\t : " << bantu->nim << endl;
+        
         cout << "---- Dipersilahkan Masuk ---- " << endl;
         hapus = qDepan;
         qDepan = hapus->next;
@@ -124,15 +172,15 @@ void _dequeue()
     }
 }
 
-void _cetakQueue()
+void cetakqueue()
 {
-    if (_kosong())
+     if (queuekosong())
     {
         cout << "Data Antrian Kosong!" << endl;
     }
     else
     {
-        cout << "Banyak Antrian : " << _banyakQueue() << endl;
+        cout << "Banyak Antrian : " << banyakqueue() << endl;
         bantu = qDepan;
         int no = 1;
         while (no <= maxQueue)
@@ -150,48 +198,4 @@ void _cetakQueue()
             no++;
         }
     }
-}
-
-int main()
-{
-    int pilih;
-    char back;
-
-    do
-    {
-        cout << endl;
-        cout << "==== PROGRAM ANTRIAN PSIKOLOGIS ====" << endl;
-
-        cout << "Menu :" << endl;
-        cout << "1. Daftar" << endl;
-        cout << "2. Antrian" << endl;
-        cout << "3. Masuk Ruangan" << endl;
-        cout << "4. Exit" << endl;
-        cout << "Pilih : ";
-        cin >> pilih;
-        switch (pilih)
-        {
-        case 1:
-            cout << "---- Form Pendaftaran ----" << endl;
-            _enqueue();
-            break;
-        case 2:
-            cout << "---- Data Antrian ----" << endl;
-            _cetakQueue();
-            break;
-        case 3:
-
-            _dequeue();
-            break;
-        case 4 :
-        exit(1);
-        break;
-        default:
-            break;
-        }
-        cout << endl;
-        cout << "Back to Menu ? (y/n) ";
-        cin >> back;
-        system("cls");
-    } while (back == 'y' || back == 'Y');
 }
