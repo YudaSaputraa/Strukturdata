@@ -1,1 +1,1 @@
-  maxQueue[qBelakang] = nim;
+  no++;

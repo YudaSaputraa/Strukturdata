@@ -3,17 +3,17 @@
 #include <conio.h>
 using namespace std;
 
-struct node
+struct node // membuat struct yang isinya nama, alamat nim, dan pointer next
 {
-    char nama[20], alamat[20];
-    long int nim;
-    node *next;
+  char nama[20], alamat[20];
+  long int nim;
+  node *next;
 };
-node *awal, *akhir, *baru, *bantu, *hapus;
+node *awal, *akhir, *baru, *bantu, *hapus; // deklarasi node pointer
 
 long int nimm;
 
-void newNode();
+void newNode(); // inisialisasi fungsi-funsgi
 int cekList();
 void infoNode();
 void sisipDepan();
@@ -22,200 +22,209 @@ void sisipTengah();
 void lihatData();
 void hapusNode();
 
-int main()
+int main() // main
 {
-    int menu;
-    char back, backMetode, metode;
-    do
+  int menu;
+  char back, backMetode, metode;
+  do
+  {
+    cout << endl; // tampilan awal
+    cout << "++++++ PROGRAM LINKED LIST Pointer ++++++" << endl;
+    cout << endl;
+    cout << "Disini Tersedia :" << endl;
+    cout << "1. Input Data" << endl;
+    cout << "2. Lihat Data" << endl;
+    cout << "3. Hapus data" << endl;
+    cout << "Pilih Menu : ";
+    cin >> menu;
+    system("cls");
+    switch (menu) // percabangan untuk memilih menu
     {
-        cout << endl;
-        cout << "++++++ PROGRAM LINKED LIST Pointer ++++++" << endl;
-        cout << endl;
-        cout << "Disini Tersedia :" << endl;
-        cout << "1. Input Data" << endl;
-        cout << "2. Lihat Data" << endl;
-        cout << "3. Hapus data" << endl;
-        cout << "Pilih Menu : ";
-        cin >> menu;
-        system("cls");
-        switch (menu)
+    case 1:
+      do
+      {
+        cout << "---- Mau Input Data Dari Sisi Mana? ---- " << endl;
+        cout << "1. Input Data Depan" << endl;
+        cout << "2. Input Data Belakang" << endl;
+        cout << "3. Input Data Tengah" << endl;
+        cout << "Saya memilih : ";
+        metode = getch();
+        switch (metode) // percabangan untuk memilih metode
         {
-        case 1:
-            do
-            {
-                cout << "---- Mau Input Data Dari Sisi Mana? ---- " << endl;
-                cout << "1. Input Data Depan" << endl;
-                cout << "2. Input Data Belakang" << endl;
-                cout << "3. Input Data Tengah" << endl;
-                cout << "Saya memilih : ";
-                metode = getch();
-                switch (metode)
-                {
-                case '1':
-                    sisipDepan();
-                    break;
-                case '2':
-                    sisipBelakang();
-                    break;
-                case '3':
-                    sisipTengah();
-                    break;
-                default:
-                    cout << "Pilih Menu yang ada saja yaa!" << endl;
-                    break;
-                }
-                cout << endl;
-                cout << "Pilih Metode Lain ? (y/n) ";
-                backMetode = getch();
-                system("cls");
-            } while (backMetode == 'y' || backMetode == 'Y');
-            break;
-
-        case 2:
-            lihatData();
-            break;
-        case 3:
-            hapusNode();
-            break;
+        case '1':
+          sisipDepan();
+          break;
+        case '2':
+          sisipBelakang();
+          break;
+        case '3':
+          sisipTengah();
+          break;
         default:
-            break;
+          cout << "Pilih Menu yang ada saja yaa!" << endl;
+          break;
         }
         cout << endl;
-        cout << "Kembali Ke Menu ? (y/n) ";
-        cin >> back;
+        cout << "Pilih Metode Lain ? (y/n) ";
+        backMetode = getch();
         system("cls");
-    } while (back == 'y' || back == 'Y');
-}
+      } while (backMetode == 'y' || backMetode == 'Y'); // kondisi back untuk memilih metode lain
+      break;
 
-void newNode()
-{
-    awal = NULL;
-    akhir = NULL;
-}
-
-int cekList()
-{
-    if (akhir == NULL)
-    {
-        return 1;
+    case 2:
+      lihatData();
+      break;
+    case 3:
+      hapusNode();
+      break;
+    default:
+      break;
     }
-    else
-    {
-        return 0;
-    }
-}
-
-void infoNode()
-{
-    cout << "Masukkan NIM\t : ";
-    cin >> baru->nim;
-    cout << "Masukkan Nama\t : ";
-    cin >> baru->nama;
-    cout << "Masukkan Alamat\t : ";
-    cin >> baru->alamat;
-}
-
-void sisipDepan()
-{
     cout << endl;
-    cout << "Sisip Depan" << endl;
-    baru = new node;
-    infoNode();
-    baru->next = awal;
-    awal = baru;
-    akhir = baru;
+    cout << "Kembali Ke Menu ? (y/n) ";
+    cin >> back;
+    system("cls");
+  } while (back == 'y' || back == 'Y'); // kondisi back to menu
 }
 
-void sisipBelakang()
+void newNode() // fungsi deklarasi node awal
 {
-    cout << endl;
-    cout << "Sisip Belakang" << endl;
-    baru = new node;
-    infoNode();
-    baru->next = NULL;
-    akhir->next = baru;
-    akhir = baru;
+  awal = NULL;
+  akhir = NULL;
 }
 
-void sisipTengah()
+int cekList() // cek list kosong/tidak
 {
-    cout << endl;
-    cout << "Sisip Tengah" << endl;
-    baru = new node;
-    cout << "Masukkan NIM\t : ";
-    cin >> baru->nim;
-    cout << "Masukkan Nama\t : ";
-    cin >> baru->nama;
-    cout << "Masukkan Alamat\t : ";
-    cin >> baru->alamat;
-    baru->next = NULL;
-    bantu = awal;
-    while (bantu->next->nim < baru->nim) // ketika false
-    {
-        bantu = bantu->next;
-    }
-    baru->next = bantu->next;
-    bantu->next = baru;
+  if (akhir == NULL)
+  {
+    return 1;
+  }
+  else
+  {
+    return 0;
+  }
 }
 
-void lihatData()
+void infoNode() // inputan untuk struct
 {
+  cout << "Masukkan NIM\t : ";
+  cin >> baru->nim;
+  cout << "Masukkan Nama\t : ";
+  cin >> baru->nama;
+  cout << "Masukkan Alamat\t : ";
+  cin >> baru->alamat;
+}
+
+void sisipDepan() // sisip depan
+{
+  cout << endl;
+  cout << "Sisip Depan" << endl;
+  baru = new node;
+  infoNode();
+  baru->next = awal;
+  awal = baru;
+  akhir = baru;
+}
+
+void sisipBelakang() // sisip belakang
+{
+  cout << endl;
+  cout << "Sisip Belakang" << endl;
+  baru = new node;
+  infoNode();
+  baru->next = NULL;
+  akhir->next = baru;
+  akhir = baru;
+}
+
+void sisipTengah() // sisip tengah
+{
+  cout << endl;
+  cout << "Sisip Tengah" << endl;
+  baru = new node;
+  cout << "Masukkan NIM\t : ";
+  cin >> baru->nim;
+  cout << "Masukkan Nama\t : ";
+  cin >> baru->nama;
+  cout << "Masukkan Alamat\t : ";
+  cin >> baru->alamat;
+  baru->next = NULL;
+  bantu = awal;
+  while (bantu->next->nim < baru->nim) // ketika false
+  {
+    bantu = bantu->next;
+  }
+  baru->next = bantu->next;
+  bantu->next = baru;
+}
+
+void lihatData() // lihat data
+{
+  if (cekList()) // cek apakah data kosong/tidak
+  {
+
+    cout << "Data masih Kosong!" << endl;
+  }
+  else // jika data tidak kosong
+  {
     bantu = awal;
     cout << "=== Data ===" << endl;
     while (bantu != NULL)
     {
-        cout << endl;
-        cout << "NIM\t : " << bantu->nim << endl;
-        cout << "Nama\t : " << bantu->nama << endl;
-        cout << "Alamat \t : " << bantu->alamat << endl;
-        bantu = bantu->next;
+      cout << endl;
+      cout << "NIM\t : " << bantu->nim << endl;
+      cout << "Nama\t : " << bantu->nama << endl;
+      cout << "Alamat \t : " << bantu->alamat << endl;
+      bantu = bantu->next;
     }
+  }
 }
 
-void hapusNode()
+void hapusNode() // hapus node
 {
 
-    if (cekList())
+  if (cekList())
+  {
+    cout << "Data Masih Kosong" << endl; // jika data kosong
+  }
+  else // jika data tidak kosong
+  {
+    lihatData();
+    cout << "Masukkan NIM : ";
+    cin >> nimm;
+    if (awal->nim == nimm)
     {
-        cout << "Data Masih Kosong" << endl;
+      hapus = awal; // hapus depan
+      awal = hapus->next;
+      free(hapus);
     }
     else
     {
-        cout << "Masukkan NIM : ";
-        cin >> nimm;
-        if (awal->nim == nimm)
+      bantu = awal;
+      while (bantu->next->nim != nimm && bantu->next != NULL)
+      {
+        bantu = bantu->next;
+      }
+      hapus = bantu->next;
+      if (hapus == NULL)
+      {
+        cout << "Node Tidak Ditemukan" << endl;
+      }
+      else
+      {
+        if (hapus == akhir) // hapus tengah dan akhir
         {
-            hapus = awal;
-            awal = hapus->next;
-            free(hapus);
+          akhir = bantu;
+          akhir->next = NULL;
         }
         else
         {
-            bantu = awal;
-            while (bantu->next->nim != nimm && bantu->next != NULL)
-            {
-                bantu = bantu->next;
-            }
-            hapus = bantu->next;
-            if (hapus == NULL)
-            {
-                cout << "Node Tidak Ditemukan" << endl;
-            }
-            else
-            {
-                if (hapus == akhir)
-                {
-                    akhir = bantu;
-                    akhir->next = NULL;
-                }
-                else
-                {
-                    bantu->next = hapus->next;
-                }
-                free(hapus);
-                system("cls");
-            }
+          bantu->next = hapus->next;
         }
-        cout << "Data " << nimm << " Terhapus!" << endl;
+        free(hapus);
+        system("cls");
+      }
     }
+    cout << "Data " << nimm << " Terhapus!" << endl;
+  }
 }

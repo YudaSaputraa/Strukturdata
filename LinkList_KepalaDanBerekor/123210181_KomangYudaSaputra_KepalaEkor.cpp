@@ -3,15 +3,15 @@
 #include <conio.h>
 using namespace std;
 
-struct node
+struct node // deklarasi struct yang isinya
 {
-    char namabuah[20], alamat[20];
+    char nama[20], alamat[20];
     long long int nim;
     node *next;
 };
-node *kepala, *ekor, *baru, *bantu, *hapus, *awal, *akhir;
+node *kepala, *ekor, *baru, *bantu, *hapus, *awal, *akhir; // deklrasi pointer
 
-void newNode();
+void newNode(); // inisialisasi fungsi-fungsi
 bool cekList();
 void dataNode();
 void sisipData();
@@ -19,14 +19,14 @@ void lihatDataMaju();
 void lihatDataMundur();
 void hapusNode();
 
-int main()
+int main() // main
 {
     int menu;
     char back, backMetode, metode;
-    newNode();
+    newNode(); // membuat node baru ketika program dirun pertama kali
     do
     {
-        cout << endl;
+        cout << endl; // tampilan awal
         cout << "++++++ PROGRAM LINKED LIST Kepala & Ekor ++++++" << endl;
         cout << endl;
         cout << "Disini Tersedia :" << endl;
@@ -37,7 +37,7 @@ int main()
         cout << "Pilih Menu : ";
         cin >> menu;
         system("cls");
-        switch (menu)
+        switch (menu) // percabangan untuk memilih menu
         {
         case 1:
             sisipData();
@@ -59,12 +59,12 @@ int main()
         cout << "Kembali Ke Menu ? (y/n) ";
         cin >> back;
         system("cls");
-    } while (back == 'y' || back == 'Y');
+    } while (back == 'y' || back == 'Y'); // kondisi untuk kembali ke menu
 
     return 0;
 }
 
-void newNode()
+void newNode() // fungsi untuk membuat node awal
 {
     kepala = new node;
     ekor = new node;
@@ -74,22 +74,22 @@ void newNode()
     ekor->next = NULL;
 }
 
-bool cekList()
+bool cekList() // cek list apakah kosong/tidak
 {
     return kepala->next == ekor;
 }
 
-void dataNode()
+void dataNode() // inputdan untuk data
 {
     cout << "Masukkan NIM\t : ";
     cin >> baru->nim;
     cout << "Masukkan Nama\t : ";
-    cin >> baru->namabuah;
+    cin >> baru->nama;
     cout << "Masukkan Alamat\t : ";
     cin >> baru->alamat;
 }
 
-void sisipData()
+void sisipData() // sisip data (karena kepala ekor jadinya cuma sisip tengah)
 {
     int jumlahData;
     cout << endl;
@@ -113,7 +113,7 @@ void sisipData()
     }
 }
 
-void lihatDataMaju()
+void lihatDataMaju() // lihat data maju
 {
     if (cekList())
     {
@@ -144,14 +144,14 @@ void lihatDataMaju()
         {
             cout << endl;
             cout << "NIM\t : " << bantu->nim << endl;
-            cout << "Nama\t : " << bantu->namabuah << endl;
+            cout << "Nama\t : " << bantu->nama << endl;
             cout << "Alamat\t : " << bantu->alamat << endl;
             bantu = bantu->next;
         }
     }
 }
 
-void lihatDataMundur()
+void lihatDataMundur() // lihat data mundur
 {
     if (cekList())
     {
@@ -161,14 +161,14 @@ void lihatDataMundur()
     {
         if (kepala->nim < kepala->next->nim)
         {
-
             awal = kepala;
             kepala = ekor;
 
             do
             {
                 bantu = awal;
-                while (bantu->next != ekor){
+                while (bantu->next != ekor)
+                {
                     bantu = bantu->next;
                 }
                 ekor->next = bantu;
@@ -184,14 +184,14 @@ void lihatDataMundur()
         {
             cout << endl;
             cout << "NIM\t : " << bantu->nim << endl;
-            cout << "Nama\t : " << bantu->namabuah << endl;
+            cout << "Nama\t : " << bantu->nama << endl;
             cout << "Alamat\t : " << bantu->alamat << endl;
             bantu = bantu->next;
         }
     }
 }
 
-void hapusNode()
+void hapusNode() // hapus data (jdinya cuma hapus tengah)
 {
     long int hapusNIM;
     if (cekList())
